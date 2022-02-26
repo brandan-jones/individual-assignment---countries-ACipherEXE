@@ -6,16 +6,12 @@ import org.junit.Assert.*
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import app.plantdiary.individualassignment304832.MainViewModel
+import app.plantdiary.individualassignment304832.Service.countryService
 import app.plantdiary.individualassignment304832.dto.Country
-import app.plantdiary.individualassignment304832.service.CountryService
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
@@ -44,13 +40,13 @@ class CountryUnitTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
     lateinit var mvm: MainViewModel
-    lateinit var countryService: CountryService
+    lateinit var countryService: countryService
     var allCountries : List<Country>? = ArrayList<Country>()
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     @MockK
-    lateinit var mockCountryService: CountryService
+    lateinit var mockCountryService: countryService
 
     @Before
     fun populateCountries() {
@@ -89,7 +85,7 @@ class CountryUnitTest {
     }
 
     private fun givenCountryServiceIsInitialized() {
-        countryService = CountryService()
+        countryService = countryService()
     }
 
     private suspend fun whenServiceDataAreReadAndParsed() {
