@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.awaitResponse
 
 
-class countryService{
+class CountryService{
     suspend fun fetchCountries(): List<Country>? {
         return withContext(Dispatchers.IO) {
             val retrofit = RetrofitClientInstance.retrofitInstance?.create(ICountryDAO::class.java)
